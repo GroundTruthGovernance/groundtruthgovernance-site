@@ -2,6 +2,6 @@
   "name": "groundtruthgovernance-site",
   "compatibility_date": "2026-08-01",
   "assets": {
-    "directory": "."
+    "directory": "./site"
   }
 }
