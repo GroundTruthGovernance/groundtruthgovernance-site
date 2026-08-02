@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Current and earlier evidential reports from the Ground Truth & Governance archive, documenting ground and water change around Preston New Road.">
 <title>Reports | Ground Truth &amp; Governance</title>
 <style>
   :root {
@@ -23,15 +24,20 @@
   .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
   header { border-bottom: 1px solid var(--border); padding: 18px 0; }
   header .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .site-name { font-size: 18px; font-weight: 700; }
+  .site-name { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; }
+  .site-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: var(--text-secondary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: -2px; }
+  .site-name-block { display: flex; flex-direction: column; }
   nav { font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
   nav a { color: var(--text); text-decoration: none; margin-left: 22px; }
   nav a:first-child { margin-left: 0; }
+  nav a:visited { color: var(--text); }
   nav a:hover { color: var(--accent); text-decoration: underline; }
 
   .nav-dropdown { position: relative; display: inline-block; margin-left: 22px; }
-  .nav-dropdown-trigger { cursor: pointer; color: var(--text); }
-  .nav-dropdown-trigger:hover { color: var(--accent); }
+  .nav-dropdown summary { list-style: none; cursor: pointer; color: var(--text); margin-left: 0; font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
+  .nav-dropdown summary::-webkit-details-marker { display: none; }
+  .nav-dropdown summary::marker { content: ""; }
+  .nav-dropdown summary:hover { color: var(--accent); }
   .nav-dropdown-menu {
     display: none;
     position: absolute;
@@ -51,8 +57,8 @@
     margin-left: 0;
     white-space: nowrap;
   }
-  .nav-dropdown:hover .nav-dropdown-menu,
-  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown[open] .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
   h1 { font-size: 26px; font-weight: 400; margin: 32px 0 6px; }
   .intro { font-family: Arial, Helvetica, sans-serif; font-size: 14.5px; color: var(--text-secondary); max-width: 720px; margin-bottom: 28px; }
@@ -133,7 +139,7 @@
 
   footer {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
     border-top: 1px solid var(--border);
     padding: 22px 0 40px;
@@ -145,18 +151,24 @@
 
 <header>
   <div class="wrap">
-    <div class="site-name">Ground Truth &amp; Governance</div>
-    <nav>
+    <div class="site-name-block">
+      <a class="site-name" href="index.html">Ground Truth &amp; Governance</a>
+      <span class="site-subtitle">The Open Record</span>
+    </div>
+        <nav>
       <a href="index.html">Home</a>
       <a href="reports.html">Reports</a>
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Updates</span>
+      <details class="nav-dropdown">
+        <summary class="nav-dropdown-trigger">Updates</summary>
         <div class="nav-dropdown-menu">
           <a href="july-update.html">July 2026 Update</a>
         </div>
-      </div>
+      </details>
       <a href="governance.html">Governance Analysis</a>
       <a href="lidar.html">LiDAR</a>
+      <a href="public-notice.html">Public Notice</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -171,11 +183,21 @@
 
   <div class="report-card">
     <h3>PHF&ndash;BAL Integrated Evidential Update</h3>
-    <div class="meta"><span class="badge working">First release</span><span>July 2026</span></div>
+    <div class="meta"><span class="badge working">First-release evidential draft</span><span>July 2026</span></div>
     <p class="desc">An integrated review of changing water, sediment, vegetation and ground conditions across eight connected locations between Peel Hill Farm and Ballam Road. Repeat aerial imagery, satellite chronology and 2018&ndash;2022 LiDAR comparison show recurring wet-to-dry transitions across fields, drains and banks. The report asks whether this wider spatial pattern now warrants coordinated inspection, repeat survey and targeted sampling rather than separate treatment of each feature.</p>
     <div class="links">
-      <a href="https://archive.org/details/phf-bal-integrated-evidential-update-v-0.1.7-first-release" target="_blank" rel="noopener">Read on Archive.org</a>
-      <a href="https://archive.org/details/july-report-video" target="_blank" rel="noopener">Companion video: source imagery</a>
+      <a href="https://archive.org/details/phf-bal-integrated-evidential-update-v-0.1.7-first-release" target="_blank" rel="noopener">Read report</a>
+      <a href="https://archive.org/details/july-report-video" target="_blank" rel="noopener">Companion video</a>
+    </div>
+  </div>
+
+  <div class="report-card">
+    <h3>Progressive Ground Depression, Scarp Formation and Pond-Associated Change beside Preston New Road</h3>
+    <div class="meta"><span class="badge working">Working location study</span><span>July 2026 series &middot; published 1 August 2026</span></div>
+    <p class="desc">A focused study of a group of evolving field features immediately beside the Preston New Road site. The report follows the development of a scarp-like depression complex, recurring ponding, an enlarging field depression, a newly established pond-like feature and changes at nearby Teardrop Pond between 2017 and 2026. Aerial imagery, independent satellite epochs and LiDAR lowering indicate that the area should be investigated as one local ground-and-water network.</p>
+    <div class="links">
+      <a href="https://archive.org/details/pnr-combined-scarp-depressions-pond-associated-change-1.0" target="_blank" rel="noopener">Read report</a>
+      <a href="https://archive.org/details/scarp-pond-lowering-report" target="_blank" rel="noopener">Companion video</a>
     </div>
   </div>
 
@@ -184,23 +206,13 @@
     <div class="meta"><span class="badge working">Working paper</span><span>July 2026</span></div>
     <p class="desc">An early working paper examining Peel Hill Farm as a sentinel location within the wider Fylde landscape. It brings together a dense photographic chronology, a former persistent pond and seepage area, later dry-season depressions and material expressions, drainage intervention, resident observations and independently mapped elevation change. The paper establishes the working chronology and identifies the comparisons and field measurements required for a fuller study.</p>
     <div class="links">
-      <a href="https://archive.org/details/peel-hill-farm-sentinel-study-working-paper-v-0.1" target="_blank" rel="noopener">Read on Archive.org</a>
-    </div>
-  </div>
-
-  <div class="report-card">
-    <h3>Progressive Ground Depression, Scarp Formation and Pond-Associated Change beside Preston New Road</h3>
-    <div class="meta"><span class="badge final">Report</span><span>July 2026</span></div>
-    <p class="desc">A focused study of a group of evolving field features immediately beside the Preston New Road site. The report follows the development of a scarp-like depression complex, recurring ponding, an enlarging field depression, a newly established pond-like feature and changes at nearby Teardrop Pond between 2017 and 2026. Aerial imagery, independent satellite epochs and LiDAR lowering indicate that the area should be investigated as one local ground-and-water network.</p>
-    <div class="links">
-      <a href="https://archive.org/details/pnr-combined-scarp-depressions-pond-associated-change-1.0" target="_blank" rel="noopener">Read on Archive.org</a>
-      <a href="https://archive.org/details/scarp-pond-lowering-report" target="_blank" rel="noopener">Companion video: source imagery</a>
+      <a href="https://archive.org/details/peel-hill-farm-sentinel-study-working-paper-v-0.1" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
   <div class="report-card">
     <h3>Comparative Review of Time-Resolved Gamma Survey Data Along the Preston New Road Corridor</h3>
-    <div class="meta"><span class="badge final">Report</span><span>July 2026</span></div>
+    <div class="meta"><span class="badge note">Concise technical note</span><span>July 2026</span></div>
     <p class="desc">A concise review of native gamma-survey data collected during February and July 2026. Fixed measurements, GPS tracks and time-resolved spectra document sustained local count-rate differences at two separate roadside locations, together with reductions at increased detector height. The measurements do not identify a radionuclide or source, but provide a coherent basis for a calibrated professional verification survey.</p>
     <div class="links">
       <a href="https://archive.org/details/pnr-gamma-comparative-technical-note-v-1.2" target="_blank" rel="noopener">Read report</a>
@@ -210,9 +222,9 @@
   </div>
 
   <div class="report-card">
-    <h3>July Report &mdash; High-Resolution Image Companion</h3>
+    <h3>PHF&ndash;BAL Integrated Evidential Update &mdash; High-Resolution Image Companion</h3>
     <div class="meta"><span class="badge note">Video</span><span>July 2026</span></div>
-    <p class="desc">This video accompanies the July Report and presents the underlying aerial imagery, close-ups and additional frames used in its assessment of field and surface conditions across the study area. The material follows broadly the same spatial progression as the written report, with images for each area arranged chronologically to show change through time. Intended as an evidential image resource rather than a continuously narrated presentation &mdash; pause where necessary to examine individual frames at full resolution.</p>
+    <p class="desc">This video accompanies the PHF&ndash;BAL Integrated Evidential Update and presents the underlying aerial imagery, close-ups and additional frames used in its assessment of field and surface conditions across the study area. The material follows broadly the same spatial progression as the written report, with images for each area arranged chronologically to show change through time. Intended as an evidential image resource rather than a continuously narrated presentation &mdash; pause where necessary to examine individual frames at full resolution.</p>
     <div class="links">
       <a href="https://archive.org/details/july-report-video" target="_blank" rel="noopener">Watch on Archive.org</a>
     </div>
@@ -223,10 +235,10 @@
 
   <div class="report-card">
     <h3>Pre-Deconstruction Hydro-Mechanical Surface Behaviour: An Evidential Record of the Preston New Road Well Pad</h3>
-    <div class="meta"><span class="badge final">Report</span><span>Feb 2026</span></div>
+    <div class="meta"><span class="badge final">Report</span><span>Originally submitted 20 February 2026 &middot; current version v1.2, July 2026</span></div>
     <p class="desc">A detailed chronology of the well pad from construction through decommissioning. The report records recurrent wetting at fixed perimeter locations, repeated intervention at the same areas, persistent moisture around the well cellar, rainfall-sensitive boundary behaviour and surrounding LiDAR elevation change. Its central purpose is to preserve the pre-deconstruction evidence and explain the case for proportionate investigation before the engineered surface and its present condition are irreversibly altered.</p>
     <div class="links">
-      <a href="https://archive.org/details/pnr-pre-deconstruction-hydro-mechanical-surface-behaviour-feb-26-v-1.2-july-26" target="_blank" rel="noopener">Read on Archive.org</a>
+      <a href="https://archive.org/details/pnr-pre-deconstruction-hydro-mechanical-surface-behaviour-feb-26-v-1.2-july-26" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
@@ -235,7 +247,7 @@
     <div class="meta"><span class="badge final">Report</span><span>v1.2, July 2026</span></div>
     <p class="desc">A location-based study of the former Grange Hill exploration site following decommissioning. Using repeat aerial imagery and landscape comparison, the report examines whether visible surface and ground-condition expressions persisted after the operational infrastructure had been removed. It distinguishes short-lived operational disturbance from features that remained spatially legible over time, and provides an important comparison with the continuing surface, drainage and restoration questions documented around Preston New Road.</p>
     <div class="links">
-      <a href="https://archive.org/details/grange-hill-post-decommissioning-surface-persistence-and-landscape-expression-v-1.2-july-26_202608" target="_blank" rel="noopener">Read on Archive.org</a>
+      <a href="https://archive.org/details/grange-hill-post-decommissioning-surface-persistence-and-landscape-expression-v-1.2-july-26_202608" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
@@ -244,7 +256,7 @@
     <div class="meta"><span class="badge final">Report</span></div>
     <p class="desc">The principal location-based study within the archive. It documents recurring lowering, depressions, cracking, mounding, bank erosion, seepage, sediment expression and changing discharge points across the wider Preston New Road drainage and infrastructure corridor. Ground observations, repeat aerial imagery and LiDAR comparison are used together to assess persistence and spatial relationships, and to show why the observations should be considered as a connected landscape pattern.</p>
     <div class="links">
-      <a href="https://archive.org/details/evidence-of-progressive-ground-adjustment-and-subsurface-flow-reorganisation-at-peel-hill-farm-final" target="_blank" rel="noopener">Read on Archive.org</a>
+      <a href="https://archive.org/details/evidence-of-progressive-ground-adjustment-and-subsurface-flow-reorganisation-at-peel-hill-farm-final" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
@@ -253,7 +265,7 @@
     <div class="meta"><span class="badge note">Technical briefing note</span></div>
     <p class="desc">A technical briefing note setting out spatial observations derived from LiDAR elevation differencing (2018&ndash;2022), paired field observations (2017&ndash;2026), and published seismic studies relating to the Preston New Road corridor.</p>
     <div class="links">
-      <a href="https://archive.org/details/ground-adjustment-and-hydrological-surface-expressions-in-the-preston-new-road-c" target="_blank" rel="noopener">Read on Archive.org</a>
+      <a href="https://archive.org/details/ground-adjustment-and-hydrological-surface-expressions-in-the-preston-new-road-c" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
@@ -262,7 +274,7 @@
     <div class="meta"><span class="badge final">Report</span><span>v1.1.1, July 2026</span></div>
     <p class="desc">A source-based assessment of the assumptions used to govern shale-gas development in a complex and faulted geological setting. It examines hydrogeology, induced seismicity, monitoring design, planning assumptions and regulatory response at Preston New Road. The paper finds that monitoring was largely structured to confirm predicted behaviour, while some plausible alternative pathways and distributed responses remained difficult to test or exclude within the systems used.</p>
     <div class="links">
-      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Preston%20New%20Road%20Technical%20Assessment%20of%20Hydrogeological%20Risk,%20Monitoring,%20and%20Governance%20Limits%20v1.1.1July26.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Preston%20New%20Road%20Technical%20Assessment%20of%20Hydrogeological%20Risk,%20Monitoring,%20and%20Governance%20Limits%20v1.1.1July26.pdf" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
@@ -271,7 +283,7 @@
     <div class="meta"><span class="badge final">Report</span><span>v1.0.1, July 2026</span></div>
     <p class="desc">The first structured gamma-radiation field note from the project. It compares a grass-verge reference, an elevated near-ground location, a raised-height measurement and a separate control point. The results documented a sustained local difference that was stronger near the ground, without resolving a diagnostic photopeak or identifying a source. This initial study led to the larger comparative review completed in July 2026.</p>
     <div class="links">
-      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Preliminary%20Field%20Measurements%20Indicating%20Spatial%20Variation%20in%20Ambient%20Gamma%20Radiation%20Along%20a%20Roadside%20Verge%20v1.0.1july26.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Preliminary%20Field%20Measurements%20Indicating%20Spatial%20Variation%20in%20Ambient%20Gamma%20Radiation%20Along%20a%20Roadside%20Verge%20v1.0.1july26.pdf" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
@@ -282,7 +294,7 @@
     <div class="meta"><span class="badge note">Public document</span></div>
     <p class="desc">A non-technical introduction to the project, written for residents and members of the public rather than a technical or regulatory audience.</p>
     <div class="links">
-      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/plain%20speach%20document%20what%20is%20happening%20unde%20the%20fylde.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/plain%20speach%20document%20what%20is%20happening%20unde%20the%20fylde.pdf" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 

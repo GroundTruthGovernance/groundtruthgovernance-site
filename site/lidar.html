@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive LiDAR elevation-difference map comparing 2018 and 2022 survey data across the Preston New Road corridor and the Fylde coast.">
 <title>LiDAR Map | Ground Truth &amp; Governance</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <style>
@@ -30,15 +31,20 @@
     flex-wrap: wrap;
     gap: 12px;
   }
-  .site-name { font-size: 18px; font-weight: 700; }
+  .site-name { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; }
+  .site-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: var(--text-secondary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: -2px; }
+  .site-name-block { display: flex; flex-direction: column; }
   nav { font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
   nav a { color: var(--text); text-decoration: none; margin-left: 22px; }
   nav a:first-child { margin-left: 0; }
+  nav a:visited { color: var(--text); }
   nav a:hover { color: var(--accent); text-decoration: underline; }
 
   .nav-dropdown { position: relative; display: inline-block; margin-left: 22px; }
-  .nav-dropdown-trigger { cursor: pointer; color: var(--text); }
-  .nav-dropdown-trigger:hover { color: var(--accent); }
+  .nav-dropdown summary { list-style: none; cursor: pointer; color: var(--text); margin-left: 0; font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
+  .nav-dropdown summary::-webkit-details-marker { display: none; }
+  .nav-dropdown summary::marker { content: ""; }
+  .nav-dropdown summary:hover { color: var(--accent); }
   .nav-dropdown-menu {
     display: none;
     position: absolute;
@@ -58,8 +64,8 @@
     margin-left: 0;
     white-space: nowrap;
   }
-  .nav-dropdown:hover .nav-dropdown-menu,
-  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown[open] .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
   h1 { font-size: 24px; font-weight: 400; margin: 32px 0 6px; }
   .intro {
@@ -126,7 +132,7 @@
 
   footer {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
     border-top: 1px solid var(--border);
     padding: 22px 0 40px;
@@ -137,18 +143,24 @@
 
 <header>
   <div class="wrap">
-    <div class="site-name">Ground Truth &amp; Governance</div>
-    <nav>
+    <div class="site-name-block">
+      <a class="site-name" href="index.html">Ground Truth &amp; Governance</a>
+      <span class="site-subtitle">The Open Record</span>
+    </div>
+        <nav>
       <a href="index.html">Home</a>
       <a href="reports.html">Reports</a>
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Updates</span>
+      <details class="nav-dropdown">
+        <summary class="nav-dropdown-trigger">Updates</summary>
         <div class="nav-dropdown-menu">
           <a href="july-update.html">July 2026 Update</a>
         </div>
-      </div>
+      </details>
       <a href="governance.html">Governance Analysis</a>
       <a href="lidar.html">LiDAR</a>
+      <a href="public-notice.html">Public Notice</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -156,15 +168,16 @@
 <div class="wrap">
   <h1>LiDAR elevation-difference map</h1>
   <p class="intro">
-    This map shows LiDAR-derived surface elevation differences across the Fylde corridor, comparing 2018 and 2022 government survey data. Blue indicates subsidence, red indicates uplift, and the mid-range indicates minimal change. This is a remotely sensed surface-elevation comparison, not a ground survey measurement, and should be read alongside the corresponding written reports. Red-and-blue outlines around buildings, roads and other sharp-edged features commonly reflect small differences in survey alignment, surface classification or the structures present during each survey, rather than true vertical movement.
+    This map shows LiDAR-derived surface elevation differences across the Fylde corridor, comparing 2018 and 2022 government survey data. Blue indicates relative lowering, red indicates relative raising, and the mid-range indicates minimal change. This is a remotely sensed surface-elevation comparison, not a ground survey measurement, and should be read alongside the corresponding written reports. Red-and-blue outlines around buildings, roads and other sharp-edged features commonly reflect small differences in survey alignment, surface classification or the structures present during each survey, rather than true vertical movement.
   </p>
 
   <div id="map"></div>
-  <p class="caption">Source: 2018&ndash;2022 LiDAR elevation differencing, Fylde coast corridor. Full-resolution source data available on request; see Reports for methodology.</p>
+  <p class="caption">Source: Environment Agency National LiDAR Programme, 2018 and 2022 survey epochs, 1m resolution, Open Government Licence. Full-resolution source data available on request; see Reports for methodology.</p>
 
   <div class="explainer">
     <h2>Why are buildings and roads outlined in red and blue?</h2>
     <p>Sharp-edged features such as buildings, kerbs, walls and road embankments often produce paired red-and-blue outlines in LiDAR difference maps. A very small horizontal offset between the 2018 and 2022 surveys can place the edge of a building in a slightly different raster cell. One side is then calculated as higher and the other as lower, even where the structure itself has not moved vertically.</p>
+    <p>Paired red-and-blue edge signatures can also result from actual horizontal displacement of a feature between survey dates. A difference raster alone cannot reliably distinguish real lateral movement from small differences in survey registration, classification or interpolation. Comparison with the original elevation surfaces, repeat imagery and stable reference features is therefore required.</p>
     <p>Engineered areas may also contain differences caused by:</p>
     <ul>
       <li>changes to buildings, roofs, roads or site infrastructure between surveys;</li>
@@ -173,7 +186,7 @@
       <li>vegetation beside structures;</li>
       <li>steep edges, where small alignment differences produce large apparent elevation changes.</li>
     </ul>
-    <p>These effects commonly appear as narrow, alternating red-and-blue bands following the precise outline of a structure. They should not automatically be interpreted as subsidence or uplift.</p>
+    <p>These effects commonly appear as narrow, alternating red-and-blue bands following the precise outline of a structure. They should not automatically be interpreted as relative lowering or raising.</p>
     <p>By contrast, potentially meaningful surface change is more likely to appear as a spatially coherent area extending across the ground surface, rather than as a narrow paired outline confined to the edge of a building or road.</p>
   </div>
 </div>
@@ -228,7 +241,7 @@
     onAdd: function() {
       var div = L.DomUtil.create('div', 'legend');
       div.innerHTML =
-        '<div class="row"><span>Subsidence</span><span>Uplift</span></div>' +
+        '<div class="row"><span>Relative lowering</span><span>Relative raising</span></div>' +
         '<div class="bar"></div>' +
         '<div class="row"><span>&minus;</span><span>0</span><span>+</span></div>';
       return div;

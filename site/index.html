@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ground Truth & Governance — an independent evidence archive documenting ground and water change across the Preston New Road corridor and the wider Fylde landscape.">
 <title>Ground Truth &amp; Governance</title>
 <style>
   :root {
@@ -21,15 +22,20 @@
 
   header { border-bottom: 1px solid var(--border); padding: 18px 0; }
   header .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .site-name { font-size: 18px; font-weight: 700; letter-spacing: 0.2px; }
+  .site-name { font-size: 18px; font-weight: 700; letter-spacing: 0.2px; color: var(--text); text-decoration: none; }
+  .site-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: var(--text-secondary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: -2px; }
+  .site-name-block { display: flex; flex-direction: column; }
   nav { font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
   nav a { color: var(--text); text-decoration: none; margin-left: 22px; }
   nav a:first-child { margin-left: 0; }
+  nav a:visited { color: var(--text); }
   nav a:hover { color: var(--accent); text-decoration: underline; }
 
   .nav-dropdown { position: relative; display: inline-block; margin-left: 22px; }
-  .nav-dropdown-trigger { cursor: pointer; color: var(--text); }
-  .nav-dropdown-trigger:hover { color: var(--accent); }
+  .nav-dropdown summary { list-style: none; cursor: pointer; color: var(--text); margin-left: 0; font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
+  .nav-dropdown summary::-webkit-details-marker { display: none; }
+  .nav-dropdown summary::marker { content: ""; }
+  .nav-dropdown summary:hover { color: var(--accent); }
   .nav-dropdown-menu {
     display: none;
     position: absolute;
@@ -49,8 +55,8 @@
     margin-left: 0;
     white-space: nowrap;
   }
-  .nav-dropdown:hover .nav-dropdown-menu,
-  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown[open] .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
   .hero { padding: 44px 0 8px; }
   .hero h1 { font-size: 28px; font-weight: 400; margin: 0 0 14px; max-width: 640px; }
@@ -155,7 +161,7 @@
 
   footer {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
     border-top: 1px solid var(--border);
     padding: 22px 0 40px;
@@ -167,18 +173,23 @@
 
 <header>
   <div class="wrap">
-    <div class="site-name">Ground Truth &amp; Governance</div>
-    <nav>
+    <div class="site-name-block">
+      <a class="site-name" href="index.html">Ground Truth &amp; Governance</a>
+      <span class="site-subtitle">The Open Record</span>
+    </div>
+        <nav>
       <a href="reports.html">Reports</a>
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Updates</span>
+      <details class="nav-dropdown">
+        <summary class="nav-dropdown-trigger">Updates</summary>
         <div class="nav-dropdown-menu">
           <a href="july-update.html">July 2026 Update</a>
         </div>
-      </div>
+      </details>
       <a href="governance.html">Governance Analysis</a>
       <a href="lidar.html">LiDAR</a>
       <a href="public-notice.html">Public Notice</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -186,14 +197,15 @@
 <div class="wrap">
 
   <div class="hero">
-    <h1>Documenting ground and water anomalies at the Preston New Road corridor</h1>
+    <h1>Documenting ground and water change across the Preston New Road corridor</h1>
     <p>An evidence-led public archive examining environmental change, monitoring and institutional response around Preston New Road and the wider Fylde landscape.</p>
+    <p style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:14px;color:var(--text-secondary);margin-top:-10px;">Observation, analysis, accountability &mdash; examining the boundaries carefully.</p>
     <div class="notice">
-      <strong>Public notice:</strong> a site deconstruction enforcement timeline is currently in effect. <a href="public-notice.html">Read the full notice &rarr;</a>
+      <strong>Public notice:</strong> Lancashire County Council announced on 8 June 2026 that it had served an enforcement notice requiring removal of the Preston New Road site infrastructure within four months and restoration of the land within six months of service. <a href="public-notice.html">Read the public notice &rarr;</a>
     </div>
   </div>
 
-  <img class="hero-image" src="Images/DJI_0045.JPG" alt="Preston New Road well pad within the surrounding Fylde landscape">
+  <img class="hero-image" src="Images/DJI_0045.JPG" alt="Aerial view of the Preston New Road well pad during operations, with extensive standing water and waterlogged tracks across the surrounding fields.">
   <p class="hero-caption">Preston New Road within the surrounding Fylde landscape during operations. The archive examines the site together with the fields, drainage systems, water bodies and infrastructure around it.</p>
 
   <section class="block">
@@ -218,19 +230,19 @@
       <p>Four linked studies bring together recent field observations, historical aerial imagery, LiDAR comparison and native environmental measurement data from Preston New Road, Peel Hill Farm and the adjoining corridor.</p>
     </div>
     <div class="mini-cards">
-      <a class="mini-card" href="july-update.html">
+      <a class="mini-card" href="july-update.html#phf-bal">
         <div class="label">PHF&ndash;BAL Integrated Evidential Update</div>
         <div class="sub">Eight connected locations, corridor-wide</div>
       </a>
-      <a class="mini-card" href="july-update.html">
+      <a class="mini-card" href="july-update.html#scarp">
         <div class="label">Scarp, Depressions and Pond-Associated Change</div>
         <div class="sub">Beside Preston New Road, 2017&ndash;2026</div>
       </a>
-      <a class="mini-card" href="july-update.html">
+      <a class="mini-card" href="july-update.html#sentinel">
         <div class="label">Peel Hill Farm Sentinel Study</div>
         <div class="sub">Working paper, v0.1</div>
       </a>
-      <a class="mini-card" href="july-update.html">
+      <a class="mini-card" href="july-update.html#gamma">
         <div class="label">Comparative Gamma Survey Review</div>
         <div class="sub">Feb &amp; July 2026 measurements</div>
       </a>

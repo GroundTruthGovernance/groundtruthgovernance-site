@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Governance analysis examining monitoring design, evidentiary thresholds and institutional response in UK onshore hydrocarbon regulation.">
 <title>Governance Analysis | Ground Truth &amp; Governance</title>
 <style>
   :root {
@@ -19,15 +20,20 @@
   .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
   header { border-bottom: 1px solid var(--border); padding: 18px 0; }
   header .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .site-name { font-size: 18px; font-weight: 700; }
+  .site-name { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; }
+  .site-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: var(--text-secondary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: -2px; }
+  .site-name-block { display: flex; flex-direction: column; }
   nav { font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
   nav a { color: var(--text); text-decoration: none; margin-left: 22px; }
   nav a:first-child { margin-left: 0; }
+  nav a:visited { color: var(--text); }
   nav a:hover { color: var(--accent); text-decoration: underline; }
 
   .nav-dropdown { position: relative; display: inline-block; margin-left: 22px; }
-  .nav-dropdown-trigger { cursor: pointer; color: var(--text); }
-  .nav-dropdown-trigger:hover { color: var(--accent); }
+  .nav-dropdown summary { list-style: none; cursor: pointer; color: var(--text); margin-left: 0; font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
+  .nav-dropdown summary::-webkit-details-marker { display: none; }
+  .nav-dropdown summary::marker { content: ""; }
+  .nav-dropdown summary:hover { color: var(--accent); }
   .nav-dropdown-menu {
     display: none;
     position: absolute;
@@ -47,8 +53,8 @@
     margin-left: 0;
     white-space: nowrap;
   }
-  .nav-dropdown:hover .nav-dropdown-menu,
-  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown[open] .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
   h1 { font-size: 26px; font-weight: 400; margin: 32px 0 6px; }
   .intro { font-family: Arial, Helvetica, sans-serif; font-size: 14.5px; color: var(--text-secondary); max-width: 720px; margin-bottom: 28px; }
@@ -116,7 +122,7 @@
 
   footer {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
     border-top: 1px solid var(--border);
     padding: 22px 0 40px;
@@ -128,18 +134,24 @@
 
 <header>
   <div class="wrap">
-    <div class="site-name">Ground Truth &amp; Governance</div>
-    <nav>
+    <div class="site-name-block">
+      <a class="site-name" href="index.html">Ground Truth &amp; Governance</a>
+      <span class="site-subtitle">The Open Record</span>
+    </div>
+        <nav>
       <a href="index.html">Home</a>
       <a href="reports.html">Reports</a>
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Updates</span>
+      <details class="nav-dropdown">
+        <summary class="nav-dropdown-trigger">Updates</summary>
         <div class="nav-dropdown-menu">
           <a href="july-update.html">July 2026 Update</a>
         </div>
-      </div>
+      </details>
       <a href="governance.html">Governance Analysis</a>
       <a href="lidar.html">LiDAR</a>
+      <a href="public-notice.html">Public Notice</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -152,21 +164,25 @@
     This section presents analysis of monitoring design and regulatory process, drawing on the evidence documented in the Reports section. Where the reports establish what has been observed, these papers examine whether existing monitoring and governance systems are structured to detect, escalate and act on findings of this kind.
   </div>
 
-  <div class="report-card">
-    <h3>Detectability, Evidentiary Burden and the Architecture of Environmental Assurance</h3>
-    <div class="meta"><span class="badge">Governance analysis</span><span>v1.0.1, July 2026</span></div>
-    <p class="desc">A general analysis of how environmental monitoring determines what becomes visible, recorded and actionable within governance. It traces the sequence from detection through classification, thresholds and escalation, showing how monitoring design also shapes the evidence available to decision-makers and the public. The paper contrasts systems designed mainly to confirm expected behaviour with architectures that actively test uncertainty and support adaptive reassessment.</p>
-    <div class="links">
-      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Detectability,%20Evidentiary%20Burden,%20and%20the%20Architecture%20of%20Environmental%20Assurance%20v1.0.1July26.pdf" target="_blank" rel="noopener">Read PDF</a>
-    </div>
-  </div>
+  <p style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:var(--text-secondary);margin-bottom:20px;">The papers are arranged in their suggested reading order.</p>
+
+  <h2 class="section-title" style="font-size:19px;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:20px;">Governance papers</h2>
 
   <div class="report-card">
     <h3>Monitoring, Threshold Governance and the Architecture of Assurance in UK Onshore Hydrocarbon Regulation</h3>
     <div class="meta"><span class="badge">Governance analysis</span><span>v1.0.1, July 2026</span></div>
     <p class="desc">An examination of monitoring as a designed governance system rather than a neutral collection of measurements. Using Preston New Road and Preese Hall as stress-test examples, and West Newton A as a contemporary application, the paper considers detection limits, threshold logic, model stability, cross-domain segmentation and escalation. It distinguishes a system that is administratively legible from one that is necessarily complete.</p>
     <div class="links">
-      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Monitoring,%20Threshold%20Governance,%20and%20the%20Architecture%20of%20Assurance%20in%20UK%20Onshore%20Hydrocarbon%20Regulationv1.0.1July26.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Monitoring,%20Threshold%20Governance,%20and%20the%20Architecture%20of%20Assurance%20in%20UK%20Onshore%20Hydrocarbon%20Regulationv1.0.1July26.pdf" target="_blank" rel="noopener">Read report</a>
+    </div>
+  </div>
+
+  <div class="report-card">
+    <h3>Detectability, Evidentiary Burden and the Architecture of Environmental Assurance</h3>
+    <div class="meta"><span class="badge">Governance analysis</span><span>v1.0.1, July 2026</span></div>
+    <p class="desc">A general analysis of how environmental monitoring determines what becomes visible, recorded and actionable within governance. It traces the sequence from detection through classification, thresholds and escalation, showing how monitoring design also shapes the evidence available to decision-makers and the public. The paper contrasts systems designed mainly to confirm expected behaviour with architectures that actively test uncertainty and support adaptive reassessment.</p>
+    <div class="links">
+      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Detectability,%20Evidentiary%20Burden,%20and%20the%20Architecture%20of%20Environmental%20Assurance%20v1.0.1July26.pdf" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 
@@ -175,7 +191,7 @@
     <div class="meta"><span class="badge">Governance analysis</span><span>v1.0.1, July 2026</span></div>
     <p class="desc">A prospective application of the monitoring-architecture framework to the West Newton A proposals. The paper maps monitoring placement, sampling cadence, thresholds, review clauses and the routes by which information moves between operational, environmental and regulatory domains. It identifies where clear exceedances would trigger defined action and where recognition of distributed or sub-threshold signals would depend upon professional synthesis.</p>
     <div class="links">
-      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Applying%20Monitoring%20Archetectre%20A%20Failure%20Mode%20Stress%20Mapping%20Of%20West%20Newton%20A%20v1.0.1July26.pdf" target="_blank" rel="noopener">Read PDF</a>
+      <a href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Applying%20Monitoring%20Archetectre%20A%20Failure%20Mode%20Stress%20Mapping%20Of%20West%20Newton%20A%20v1.0.1July26.pdf" target="_blank" rel="noopener">Read report</a>
     </div>
   </div>
 

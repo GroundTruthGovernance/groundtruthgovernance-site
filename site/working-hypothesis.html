@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The current working hypothesis concerning recurring ground, water and geochemical change around Preston New Road and the wider Fylde landscape since 2011.">
 <title>Working Hypothesis | Ground Truth &amp; Governance</title>
 <style>
   :root {
@@ -19,15 +20,20 @@
   .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
   header { border-bottom: 1px solid var(--border); padding: 18px 0; }
   header .wrap { max-width: 1000px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .site-name { font-size: 18px; font-weight: 700; }
+  .site-name { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; }
+  .site-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: var(--text-secondary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: -2px; }
+  .site-name-block { display: flex; flex-direction: column; }
   nav { font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
   nav a { color: var(--text); text-decoration: none; margin-left: 22px; }
   nav a:first-child { margin-left: 0; }
+  nav a:visited { color: var(--text); }
   nav a:hover { color: var(--accent); text-decoration: underline; }
 
   .nav-dropdown { position: relative; display: inline-block; margin-left: 22px; }
-  .nav-dropdown-trigger { cursor: pointer; color: var(--text); }
-  .nav-dropdown-trigger:hover { color: var(--accent); }
+  .nav-dropdown summary { list-style: none; cursor: pointer; color: var(--text); margin-left: 0; font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
+  .nav-dropdown summary::-webkit-details-marker { display: none; }
+  .nav-dropdown summary::marker { content: ""; }
+  .nav-dropdown summary:hover { color: var(--accent); }
   .nav-dropdown-menu {
     display: none;
     position: absolute;
@@ -47,8 +53,8 @@
     margin-left: 0;
     white-space: nowrap;
   }
-  .nav-dropdown:hover .nav-dropdown-menu,
-  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+  .nav-dropdown[open] .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
 
   h1 { font-size: 27px; font-weight: 400; margin: 36px 0 4px; }
   .meta-row {
@@ -107,7 +113,7 @@
 
   footer {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
     border-top: 1px solid var(--border);
     padding: 22px 0 40px;
@@ -120,32 +126,51 @@
 
 <header>
   <div class="wrap">
-    <div class="site-name">Ground Truth &amp; Governance</div>
-    <nav>
+    <div class="site-name-block">
+      <a class="site-name" href="index.html">Ground Truth &amp; Governance</a>
+      <span class="site-subtitle">The Open Record</span>
+    </div>
+        <nav>
       <a href="index.html">Home</a>
       <a href="reports.html">Reports</a>
-      <div class="nav-dropdown">
-        <span class="nav-dropdown-trigger">Updates</span>
+      <details class="nav-dropdown">
+        <summary class="nav-dropdown-trigger">Updates</summary>
         <div class="nav-dropdown-menu">
           <a href="july-update.html">July 2026 Update</a>
         </div>
-      </div>
+      </details>
       <a href="governance.html">Governance Analysis</a>
       <a href="lidar.html">LiDAR</a>
+      <a href="public-notice.html">Public Notice</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
 
 <div class="wrap">
-  <h1>Working Hypothesis &mdash; Executive Summary</h1>
+  <h1 id="top">Working Hypothesis &mdash; Executive Summary</h1>
   <div class="meta-row">
     <span class="badge">Working document</span>
-    <span>v1.1</span>
+    <span>v1.1 &middot; 31 July 2026</span>
     <a class="pdf-link" href="https://raw.githubusercontent.com/GroundTruthGovernance/groundtruthgovernance-site/main/Reports/Working%20Hypothesis%20V1.1.pdf" target="_blank" rel="noopener">Download PDF</a>
   </div>
 
-  <div class="status-note">
+  <div class="status-note" id="current-hypothesis">
     This document sets out a working hypothesis, not an established conclusion. It identifies competing explanations, the evidence that would support or weaken each, and the investigation required to resolve them. Passages using language such as &ldquo;does not establish&rdquo; or &ldquo;not yet prove&rdquo; are load-bearing, not defensive convention.
+  </div>
+
+  <div class="status-note">
+    <strong style="color:var(--text);">Contents</strong>
+    <ul style="margin:10px 0 0; padding-left:20px;">
+      <li><a href="#current-hypothesis" style="color:var(--accent);">Current hypothesis</a></li>
+      <li><a href="#manifestations" style="color:var(--accent);">Manifestations observed</a></li>
+      <li><a href="#receptors" style="color:var(--accent);">Potential receptors</a></li>
+      <li><a href="#competing-explanations" style="color:var(--accent);">Competing explanations</a></li>
+      <li><a href="#evidence-required" style="color:var(--accent);">Evidence required</a></li>
+      <li><a href="#conditions" style="color:var(--accent);">Conditions that would revise the hypothesis</a></li>
+      <li><a href="#conclusion" style="color:var(--accent);">Conclusion</a></li>
+    </ul>
   </div>
 
   <p>This document sets out a working hypothesis concerning the origin and significance of recurring hydrogeological, geomorphological, geochemical and surface-expression changes observed around Preston New Road, Peel Hill, Wakepark and the wider Fylde landscape since 2011.</p>
@@ -177,7 +202,8 @@
 
   <p>The working interpretation is therefore of a connected but heterogeneous system. A common change in hydraulic pressure, gas movement or flow regime would not necessarily produce identical surface expressions everywhere. Depending on local geology, sediment structure, drainage, topography, land use, redox state and chemistry, the same wider disturbance could produce mineral precipitation at one location, bubbling or gas release at another, seepage and bank erosion elsewhere, and ground lowering or pond formation where the superficial deposits are most vulnerable. The material visible at the surface need not itself originate at depth: pressure or gas movement could alter shallow groundwater chemistry and mobilise or precipitate material already present in the near-surface environment.</p>
 
-  <h2>Classes of manifestation observed to date</h2>
+  <p style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;"><a href="#top" style="color:var(--accent);">&uarr; Back to top</a></p>
+  <h2 id="manifestations">Classes of manifestation observed to date</h2>
 
   <h3>Water and discharge behaviour</h3>
   <p>Reported observations include new or recurring seepage, wet ground in elevated or drought-affected settings, bank-face discharge, persistent ponding, altered field drainage, water emerging at fixed pad and landscape locations, and changes in the position or intensity of discharge points.</p>
@@ -222,7 +248,8 @@
   <p>Exploratory surveys have identified localised near-ground increases in gamma count rate and dose relative to nearby controls, with values decreasing toward background at greater detector height in at least one tested location.</p>
   <p>No radionuclide source has been identified. The current evidence supports spatial variation in near-ground gamma response, not a conclusion of NORM mobilisation, contamination, exposure risk or food-chain transfer.</p>
 
-  <h2>Potential receptors and exposure pathways</h2>
+  <p style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;"><a href="#top" style="color:var(--accent);">&uarr; Back to top</a></p>
+  <h2 id="receptors">Potential receptors and exposure pathways</h2>
 
   <h3>Agricultural, ecological and food-chain receptors</h3>
   <p>The study area is an agricultural landscape containing grazed pasture, cultivated fields, ponds, field drains and connected watercourses. If the proposed disturbance has altered the movement or chemistry of shallow groundwater, potential exposure pathways include root-zone contact and plant uptake, deposition of dissolved or suspended material during flooding, livestock ingestion of affected water, pasture or soil, consumption of affected fodder, and transfer through aquatic organisms.</p>
@@ -266,7 +293,8 @@
     What is driving the repeated pressure, fluid emergence, geochemical expression and ground adjustment across this landscape; is that driver associated with shallow-aquifer disturbance, fault-mediated pressure or fluid migration, gas movement, seismic or stress-induced ground change, the well or pad system, another anthropogenic source, or a coupled interaction among them; and have the resulting soil, water, sediment or air conditions created any material pathway to crops, livestock, wildlife, water supplies, people or infrastructure?
   </div>
 
-  <h2>Discriminating hypotheses and expected evidence</h2>
+  <p style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;"><a href="#top" style="color:var(--accent);">&uarr; Back to top</a></p>
+  <h2 id="competing-explanations">Discriminating hypotheses and expected evidence</h2>
   <p>The required investigation should be designed to distinguish explicit competing explanations rather than simply establish that a location is unusual.</p>
 
   <h3>Shallow aquifer or drainage reorganisation</h3>
@@ -290,7 +318,8 @@
   <h3>Other anthropogenic sources</h3>
   <p>Expected indications would include chemistry, geometry or timing matching agricultural treatment, road runoff, sewer or water leakage, construction material, waste, old wells or another local activity. Such an explanation would be weakened where the pattern crosses those sources, precedes them, or has an incompatible chemical or spatial fingerprint.</p>
 
-  <h2>Evidence required to resolve the hypothesis</h2>
+  <p style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;"><a href="#top" style="color:var(--accent);">&uarr; Back to top</a></p>
+  <h2 id="evidence-required">Evidence required to resolve the hypothesis</h2>
 
   <h3>Hydrogeology and timing</h3>
   <ul>
@@ -348,7 +377,8 @@
     <li>a documented comparison of each candidate explanation against observations that support, weaken or falsify it.</li>
   </ul>
 
-  <h2>Conditions that would weaken or revise the hypothesis</h2>
+  <p style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;"><a href="#top" style="color:var(--accent);">&uarr; Back to top</a></p>
+  <h2 id="conditions">Conditions that would weaken or revise the hypothesis</h2>
   <p>The hypothesis should be weakened, narrowed or revised if robust evidence demonstrates that:</p>
   <ul>
     <li>the same patterns existed at comparable magnitude before 2011;</li>
@@ -361,7 +391,8 @@
     <li>or another natural or anthropogenic explanation accounts for the spatial-temporal pattern more completely.</li>
   </ul>
 
-  <h2>Conclusion</h2>
+  <p style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;"><a href="#top" style="color:var(--accent);">&uarr; Back to top</a></p>
+  <h2 id="conclusion">Conclusion</h2>
   <p>The present conclusion is limited but clear:</p>
   <p><em>The observed pattern is sufficiently coherent, temporally associated, measurable and mechanistically plausible to justify a connected hydrogeological, geochemical and ground-mechanics investigation, with receptor assessment where initial environmental testing identifies a credible pathway. It is not yet a proven causal account.</em></p>
 
