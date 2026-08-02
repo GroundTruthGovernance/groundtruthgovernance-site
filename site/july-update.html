@@ -106,18 +106,6 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13.5px;
   }
-  .btn-expand {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 9px 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13.5px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .btn-expand:hover { opacity: 0.9; }
   .link-plain {
     color: var(--accent);
     text-decoration: none;
@@ -125,16 +113,6 @@
     align-self: center;
   }
   .link-plain:hover { text-decoration: underline; }
-
-  .embed-frame {
-    display: none;
-    margin-top: 18px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .embed-frame iframe { width: 100%; height: 500px; border: none; display: block; }
-  .embed-frame.video iframe { height: 400px; }
 
   footer {
     font-family: Arial, Helvetica, sans-serif;
@@ -175,7 +153,7 @@
 <div class="wrap">
   <h1>July 2026 Evidential Update</h1>
   <p class="intro">
-    Four linked studies bring together recent field observations, historical aerial imagery, LiDAR comparison and native environmental measurement data from Preston New Road, Peel Hill Farm and the adjoining corridor. Each report can be read here directly, or opened in full on Archive.org.
+    Four linked studies bring together recent field observations, historical aerial imagery, LiDAR comparison and native environmental measurement data from Preston New Road, Peel Hill Farm and the adjoining corridor. Each report can be opened in full on Archive.org. The supporting videos provide high-resolution imagery of material presented in the companion papers; they are designed to be paused for closer inspection of individual frames rather than watched as a continuous presentation.
   </p>
 
   <div class="report-block" id="phf-bal">
@@ -183,11 +161,9 @@
     <div class="meta"><span class="badge working">First-release evidential draft</span><span>July 2026</span></div>
     <p class="desc">An integrated review of changing water, sediment, vegetation and ground conditions across eight connected locations between Peel Hill Farm and Ballam Road. Repeat aerial imagery, satellite chronology and 2018&ndash;2022 LiDAR comparison show recurring wet-to-dry transitions across fields, drains and banks. The report asks whether this wider spatial pattern now warrants coordinated inspection, repeat survey and targeted sampling rather than separate treatment of each feature.</p>
     <div class="controls">
-      <button class="btn-expand" onclick="toggleEmbed('phfbal')">Read embedded</button>
       <a class="link-plain" href="https://archive.org/details/phf-bal-integrated-evidential-update-v-0.1.7-first-release" target="_blank" rel="noopener">Archived copy</a>
       <a class="link-plain" href="https://archive.org/details/july-report-video" target="_blank" rel="noopener">Companion video</a>
     </div>
-    <div class="embed-frame" id="embed-phfbal"></div>
   </div>
 
   <div class="report-block" id="scarp">
@@ -195,12 +171,9 @@
     <div class="meta"><span class="badge working">Working location study</span><span>July 2026 series &middot; published 1 August 2026</span></div>
     <p class="desc">A focused study of a group of evolving field features immediately beside the Preston New Road site. The report follows the development of a scarp-like depression complex, recurring ponding, an enlarging field depression, a newly established pond-like feature and changes at nearby Teardrop Pond between 2017 and 2026. Aerial imagery, independent satellite epochs and LiDAR lowering indicate that the area should be investigated as one local ground-and-water network.</p>
     <div class="controls">
-      <button class="btn-expand" onclick="toggleEmbed('scarp')">Read embedded</button>
       <a class="link-plain" href="https://archive.org/details/pnr-combined-scarp-depressions-pond-associated-change-1.0" target="_blank" rel="noopener">Archived copy</a>
-      <button class="btn-expand" onclick="toggleEmbed('scarpvideo')" style="background:#55555a;">Watch companion video</button>
+      <a class="link-plain" href="https://archive.org/details/scarp-pond-lowering-report" target="_blank" rel="noopener">Companion video</a>
     </div>
-    <div class="embed-frame" id="embed-scarp"></div>
-    <div class="embed-frame video" id="embed-scarpvideo"></div>
   </div>
 
   <div class="report-block" id="sentinel">
@@ -208,10 +181,8 @@
     <div class="meta"><span class="badge working">Working paper</span><span>July 2026</span></div>
     <p class="desc">An early working paper examining Peel Hill Farm as a sentinel location within the wider Fylde landscape. It brings together a dense photographic chronology, a former persistent pond and seepage area, later dry-season depressions and material expressions, drainage intervention, resident observations and independently mapped elevation change. The paper establishes the working chronology and identifies the comparisons and field measurements required for a fuller study.</p>
     <div class="controls">
-      <button class="btn-expand" onclick="toggleEmbed('sentinel')">Read embedded</button>
       <a class="link-plain" href="https://archive.org/details/peel-hill-farm-sentinel-study-working-paper-v-0.1" target="_blank" rel="noopener">Archived copy</a>
     </div>
-    <div class="embed-frame" id="embed-sentinel"></div>
   </div>
 
   <div class="report-block" id="gamma">
@@ -219,12 +190,10 @@
     <div class="meta"><span class="badge note">Concise technical note</span><span>July 2026</span></div>
     <p class="desc">A concise review of native gamma-survey data collected during February and July 2026. Fixed measurements, GPS tracks and time-resolved spectra document sustained local count-rate differences at two separate roadside locations, together with reductions at increased detector height. The measurements do not identify a radionuclide or source, but provide a coherent basis for a calibrated professional verification survey.</p>
     <div class="controls">
-      <button class="btn-expand" onclick="toggleEmbed('gamma')">Read embedded</button>
       <a class="link-plain" href="https://archive.org/details/pnr-gamma-comparative-technical-note-v-1.2" target="_blank" rel="noopener">Read report</a>
       <a class="link-plain" href="https://archive.org/details/pnr-gamma-master-measurement-register-2026-07-31" target="_blank" rel="noopener">Supporting data</a>
       <a class="link-plain" href="https://doi.org/10.5281/zenodo.21757503" target="_blank" rel="noopener">Archived copy (Zenodo)</a>
     </div>
-    <div class="embed-frame" id="embed-gamma"></div>
   </div>
 
   <p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;"><a class="link-plain" href="reports.html">&larr; Browse the complete reports index</a></p>
@@ -236,44 +205,6 @@
     Ground Truth &amp; Governance &mdash; an independent evidential record of the Preston New Road corridor and related UK onshore hydrocarbon sites.
   </div>
 </footer>
-
-<script>
-  var embedSources = {
-    'phfbal': 'https://archive.org/embed/phf-bal-integrated-evidential-update-v-0.1.7-first-release',
-    'scarp': 'https://archive.org/embed/pnr-combined-scarp-depressions-pond-associated-change-1.0',
-    'scarpvideo': 'https://archive.org/embed/scarp-pond-lowering-report',
-    'sentinel': 'https://archive.org/embed/peel-hill-farm-sentinel-study-working-paper-v-0.1',
-    'gamma': 'https://archive.org/embed/pnr-gamma-comparative-technical-note-v-1.2'
-  };
-  var embedTitles = {
-    'phfbal': 'PHF–BAL Integrated Evidential Update, embedded document viewer',
-    'scarp': 'Progressive Ground Depression, Scarp Formation and Pond-Associated Change, embedded document viewer',
-    'scarpvideo': 'Scarp, Depression and Pond-Associated Change, companion video',
-    'sentinel': 'Peel Hill Farm Sentinel Study, embedded document viewer',
-    'gamma': 'Comparative Review of Time-Resolved Gamma Survey Data, embedded document viewer'
-  };
-
-  function toggleEmbed(key) {
-    var frame = document.getElementById('embed-' + key);
-    if (!frame) return;
-    if (frame.style.display === 'block') {
-      frame.style.display = 'none';
-      return;
-    }
-    if (!frame.dataset.loaded) {
-      var iframe = document.createElement('iframe');
-      iframe.src = embedSources[key];
-      iframe.title = embedTitles[key] || 'Embedded document viewer';
-      iframe.setAttribute('frameborder', '0');
-      iframe.setAttribute('webkitallowfullscreen', 'true');
-      iframe.setAttribute('mozallowfullscreen', 'true');
-      iframe.setAttribute('allowfullscreen', '');
-      frame.appendChild(iframe);
-      frame.dataset.loaded = 'true';
-    }
-    frame.style.display = 'block';
-  }
-</script>
 
 </body>
 </html>
