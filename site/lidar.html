@@ -36,6 +36,31 @@
   nav a:first-child { margin-left: 0; }
   nav a:hover { color: var(--accent); text-decoration: underline; }
 
+  .nav-dropdown { position: relative; display: inline-block; margin-left: 22px; }
+  .nav-dropdown-trigger { cursor: pointer; color: var(--text); }
+  .nav-dropdown-trigger:hover { color: var(--accent); }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 0;
+    min-width: 190px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+    z-index: 20;
+  }
+  .nav-dropdown-menu a {
+    display: block;
+    padding: 8px 16px;
+    margin-left: 0;
+    white-space: nowrap;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu { display: block; }
+
   h1 { font-size: 24px; font-weight: 400; margin: 32px 0 6px; }
   .intro {
     font-family: Arial, Helvetica, sans-serif;
@@ -78,6 +103,27 @@
   }
   .legend .row { display: flex; justify-content: space-between; }
 
+  .explainer {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    background: #f7f7f5;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 40px;
+  }
+  .explainer h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 10px;
+  }
+  .explainer p { margin: 0 0 12px; }
+  .explainer ul { margin: 0 0 12px; padding-left: 20px; }
+  .explainer li { margin-bottom: 6px; }
+
   footer {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
@@ -95,9 +141,14 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="reports.html">Reports</a>
-      <a href="governance.html">Governance</a>
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">Updates</span>
+        <div class="nav-dropdown-menu">
+          <a href="july-update.html">July 2026 Update</a>
+        </div>
+      </div>
+      <a href="governance.html">Governance Analysis</a>
       <a href="lidar.html">LiDAR</a>
-      <a href="uk-sites.html">UK Sites</a>
     </nav>
   </div>
 </header>
@@ -105,11 +156,26 @@
 <div class="wrap">
   <h1>LiDAR elevation-difference map</h1>
   <p class="intro">
-    This map shows LiDAR-derived surface elevation differences across the Fylde corridor, comparing 2018 and 2022 government survey data. Blue indicates subsidence, red indicates uplift, and the mid-range indicates minimal change. This is a remotely sensed surface-elevation comparison, not a ground survey measurement, and should be read alongside the corresponding written reports.
+    This map shows LiDAR-derived surface elevation differences across the Fylde corridor, comparing 2018 and 2022 government survey data. Blue indicates subsidence, red indicates uplift, and the mid-range indicates minimal change. This is a remotely sensed surface-elevation comparison, not a ground survey measurement, and should be read alongside the corresponding written reports. Red-and-blue outlines around buildings, roads and other sharp-edged features commonly reflect small differences in survey alignment, surface classification or the structures present during each survey, rather than true vertical movement.
   </p>
 
   <div id="map"></div>
   <p class="caption">Source: 2018&ndash;2022 LiDAR elevation differencing, Fylde coast corridor. Full-resolution source data available on request; see Reports for methodology.</p>
+
+  <div class="explainer">
+    <h2>Why are buildings and roads outlined in red and blue?</h2>
+    <p>Sharp-edged features such as buildings, kerbs, walls and road embankments often produce paired red-and-blue outlines in LiDAR difference maps. A very small horizontal offset between the 2018 and 2022 surveys can place the edge of a building in a slightly different raster cell. One side is then calculated as higher and the other as lower, even where the structure itself has not moved vertically.</p>
+    <p>Engineered areas may also contain differences caused by:</p>
+    <ul>
+      <li>changes to buildings, roofs, roads or site infrastructure between surveys;</li>
+      <li>differences in point density, scan angle, classification and interpolation;</li>
+      <li>vehicles, temporary equipment or other objects present during one survey;</li>
+      <li>vegetation beside structures;</li>
+      <li>steep edges, where small alignment differences produce large apparent elevation changes.</li>
+    </ul>
+    <p>These effects commonly appear as narrow, alternating red-and-blue bands following the precise outline of a structure. They should not automatically be interpreted as subsidence or uplift.</p>
+    <p>By contrast, potentially meaningful surface change is more likely to appear as a spatially coherent area extending across the ground surface, rather than as a narrow paired outline confined to the edge of a building or road.</p>
+  </div>
 </div>
 
 <footer>
@@ -120,10 +186,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
-  // Center point is approximate — adjust to match the true centre of the tile extent once confirmed.
   var map = L.map('map', {
-    center: [53.82, -2.90],
-    zoom: 13,
+    center: [53.78, -2.95],
+    zoom: 14,
     minZoom: 10,
     maxZoom: 17
   });
