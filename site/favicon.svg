@@ -1,0 +1,28 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- base: bottom bar -->
+  <rect x="32" y="90" width="36" height="5.5" fill="#1a1a1a"/>
+  <!-- base: rounded tier -->
+  <path d="M38 90 Q38 83 44 83 L56 83 Q62 83 62 90 Z" fill="#1a1a1a"/>
+  <!-- central post, slightly flared at foot -->
+  <path d="M46.5 26 L53.5 26 L54.5 78 Q54.5 83 50 83 Q45.5 83 45.5 78 Z" fill="#1a1a1a"/>
+  <!-- finial connector -->
+  <rect x="48" y="21" width="4" height="5.5" fill="#1a1a1a"/>
+  <!-- flame finial -->
+  <path d="M50 8 Q54 15 52.5 20 Q51.5 22.5 50 22.5 Q48.5 22.5 47.5 20 Q46 15 50 8 Z" fill="#1a1a1a"/>
+  <!-- arched beam -->
+  <path d="M14 33 Q50 24 86 33 L86 36 Q50 27.5 14 36 Z" fill="#1a1a1a"/>
+  <!-- pivot points -->
+  <circle cx="14" cy="34.5" r="4" fill="#1a1a1a"/>
+  <circle cx="86" cy="34.5" r="4" fill="#1a1a1a"/>
+  <!-- left strings (solid triangle, pan hangs lower - weighted side) -->
+  <path d="M14 34.5 L9 60 L19 60 Z" fill="#1a1a1a"/>
+  <!-- right strings (pan sits higher) -->
+  <path d="M86 34.5 L80 52 L92 52 Z" fill="#1a1a1a"/>
+  <!-- left pan (lower) -->
+  <path d="M4 60 Q14 72 24 60 Z" fill="#1a1a1a"/>
+  <!-- right pan (higher) -->
+  <path d="M74 52 Q86 62 98 52 Z" fill="#1a1a1a"/>
+  <!-- rocks piled on left pan -->
+  <path d="M11 59 L15 54 L20 56 L21 60 L17 62 L12 61 Z" fill="#1a1a1a"/>
+  <path d="M17 60 L21 57 L24 60 L23 63 L18 63 Z" fill="#1a1a1a"/>
+</svg>
