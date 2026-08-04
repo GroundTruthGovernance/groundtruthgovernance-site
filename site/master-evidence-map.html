@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ground Truth Governance — Master Evidence Map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+<style>
+  :root{
+    --ink:#26302a;
+    --parchment:#f2efe6;
+    --panel:#e9e4d6;
+    --line:#c9c0a8;
+    --muted:#6b6656;
+    --fault-red:#a63d3d;
+    --link-line:#5a6b8c;
+
+    /* site colours */
+    --c-ea:#4b6b52;      /* moss — EA Ground Adjustment */
+    --c-ea-dark:#33473a;
+    --c-scarp:#a67c3d;   /* ochre — Scarp/Depressions/Pond */
+    --c-scarp-dark:#7c5c28;
+    --c-bal:#3d6b8c;     /* slate blue — PHF-BAL corridor */
+    --c-bal-dark:#294a63;
+    --c-sentinel:#7c4b8c; /* plum — PHF Sentinel */
+    --c-sentinel-dark:#573362;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;background:var(--parchment);
+    font-family:"Iowan Old Style","Georgia",serif; color:var(--ink);}
+
+  .map-embed{
+    width:100%;
+    height:640px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  }
+  .app{display:grid; grid-template-columns:320px 1fr; height:100%;}
+  @media (max-width:760px){ .app{grid-template-columns:1fr;} #sidebar{order:2; height:260px;} #map{order:1; height:calc(100% - 260px);} }
+
+  #sidebar{
+    background:var(--panel);
+    border-right:1px solid var(--line);
+    display:flex; flex-direction:column;
+    overflow:hidden;
+  }
+  header.brand{
+    padding:14px 16px 10px 16px;
+    border-bottom:1px solid var(--line);
+  }
+  header.brand .eyebrow{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10px; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--ink); opacity:.65; font-weight:600; margin:0 0 3px 0;
+  }
+  header.brand h1{
+    font-size:16px; line-height:1.25; margin:0; font-weight:600;
+  }
+  .filters{
+    font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px;
+    padding:10px 16px; border-bottom:1px solid var(--line);
+  }
+  .filter-row{ display:flex; align-items:center; gap:7px; margin-bottom:6px; cursor:pointer; user-select:none; }
+  .filter-row input{ accent-color:var(--ink); }
+  .swatch{ width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+
+  .line-legend{
+    font-family:"Helvetica Neue",Arial,sans-serif; font-size:11.5px;
+    padding:10px 16px; border-bottom:1px solid var(--line);
+  }
+  .line-legend .lg-title{
+    font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink); opacity:.55; font-weight:600; margin:0 0 7px 0;
+  }
+  .line-row{ display:flex; align-items:flex-start; gap:8px; margin-bottom:7px; }
+  .line-row:last-child{ margin-bottom:0; }
+  .line-swatch{ width:22px; height:0; border-top-width:2.5px; border-top-style:dashed; margin-top:6px; flex:0 0 auto; }
+  .line-row .line-label{ line-height:1.4; }
+  .line-row .line-label .caveat{ display:block; color:var(--muted); font-size:10.5px; margin-top:1px; }
+
+  .zone-list{ overflow-y:auto; flex:1; padding:4px 0 16px 0; }
+  .zone-item{
+    display:flex; gap:9px; align-items:flex-start;
+    padding:9px 16px; cursor:pointer;
+    border-bottom:1px solid var(--line);
+    transition: background .12s ease;
+  }
+  .zone-item:hover, .zone-item.active{ background:#ded6bf; }
+  .zone-item.hidden{ display:none; }
+  .zone-dot{
+    width:9px; height:9px; border-radius:50%; margin-top:5px; flex:0 0 auto;
+    border:1px solid rgba(0,0,0,.25);
+  }
+  .zone-meta .name{ font-weight:600; font-size:13.5px; line-height:1.3; }
+  .zone-meta .desc{
+    font-family:"Helvetica Neue",Arial,sans-serif; font-size:11px; color:var(--muted); margin-top:2px; line-height:1.4;
+  }
+
+  #map{ background:#dfe3da; }
+
+  .leaflet-popup-content-wrapper{
+    background:var(--parchment); border-radius:4px; border:1px solid var(--line);
+  }
+  .popup-inner{ font-family:"Helvetica Neue",Arial,sans-serif; width:220px; }
+  .popup-inner .p-name{ font-family:Georgia,serif; font-weight:700; font-size:14.5px; margin:0 0 4px 0; }
+  .popup-inner .p-desc{ font-size:12px; line-height:1.45; color:var(--ink); margin:0 0 9px 0; }
+  .popup-inner a.p-link{
+    display:block; font-size:12px; font-weight:600; text-decoration:none;
+    color:#fff; padding:6px 8px; border-radius:3px; text-align:center;
+  }
+  .popup-inner .p-doc{
+    font-size:10.5px; color:var(--muted); margin-top:6px; text-align:center;
+  }
+</style>
+</head>
+<body>
+<div class="map-embed">
+<div class="app">
+  <div id="sidebar">
+    <header class="brand">
+      <p class="eyebrow">Ground Truth Governance</p>
+      <h1>Master Evidence Map</h1>
+    </header>
+    <div class="filters" id="filters"></div>
+    <div class="line-legend">
+      <p class="lg-title">Lines</p>
+      <div class="line-row">
+        <span class="line-swatch" style="border-top-color:var(--fault-red)"></span>
+        <span class="line-label">Wakepark Fault<span class="caveat">Projection per Prof. Smythe — not a surveyed line</span></span>
+      </div>
+      <div class="line-row">
+        <span class="line-swatch" style="border-top-color:var(--link-line)"></span>
+        <span class="line-label">Cross-referenced locations<span class="caveat">Explicit link in source text, not proximity</span></span>
+      </div>
+    </div>
+    <div class="zone-list" id="zoneList"></div>
+  </div>
+  <div id="map"></div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+/* =========================================================================
+   DOCUMENT REGISTRY
+   href is a placeholder path — replace with the real hosted location of
+   each file on the site (Cloudflare Workers static assets / Internet
+   Archive). link_type controls how page-deep-linking is built.
+========================================================================= */
+const DOC_REGISTRY = {
+  EA_GROUND_ADJUSTMENT: {
+    title: "Evidence of Progressive Ground Adjustment and Subsurface Flow Reorganisation around Preston New Road",
+    href: "https://archive.org/download/evidence-of-progressive-ground-adjustment-and-subsurface-flow-reorganisation-aro/Evidence%20of%20Progressive%20Ground%20Adjustment%20and%20Subsurface%20Flow%20Reorganisation%20around%20Preston%20New%20Road%201.1July26.pdf",
+    link_type: "pdf"
+  },
+  PNR_SCARP_DEPRESSIONS_POND_v1_0: {
+    title: "Progressive Ground Depression, Scarp Formation and Pond-Associated Change beside Preston New Road",
+    href: "https://archive.org/download/pnr-combined-scarp-depressions-pond-associated-change-1.0/PNR_Combined_Scarp_Depressions_Pond_Associated_Change_1.0.pdf",
+    link_type: "pdf"
+  },
+  PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7: {
+    title: "PHF–BAL Integrated Evidential Update — Peel Hill Farm–Ballam Road Corridor",
+    href: "https://archive.org/download/phf-bal-integrated-evidential-update-v-0.1.7-first-release/PHF-BAL_Integrated_Evidential_Update_v0.1.7_First_Release.pdf",
+    link_type: "pdf"
+  },
+  PHF_SENTINEL_STUDY_v0_1: {
+    title: "Peel Hill Farm Sentinel Study",
+    href: "https://archive.org/download/peel-hill-farm-sentinel-study-working-paper-v-0.1/Peel_Hill_Farm_Sentinel_Study_Working_Paper_v0.1.pdf",
+    link_type: "pdf"
+  }
+};
+
+/* =========================================================================
+   SITES — grouping + colour, drives legend/filter and pin colour
+========================================================================= */
+const SITES = {
+  ea:       { label: "PNR — Ground Adjustment",        color: "var(--c-ea)",       dark: "var(--c-ea-dark)" },
+  scarp:    { label: "PNR — Scarp / Depressions / Pond", color: "var(--c-scarp)",    dark: "var(--c-scarp-dark)" },
+  bal:      { label: "Peel Hill Farm–Ballam Rd Corridor", color: "var(--c-bal)",     dark: "var(--c-bal-dark)" },
+  sentinel: { label: "Peel Hill Farm Sentinel Study",   color: "var(--c-sentinel)", dark: "var(--c-sentinel-dark)" }
+};
+
+/* =========================================================================
+   ZONES — all 25 confirmed pins.
+   `links` references other zone ids that are EXPLICITLY cross-referenced
+   in the source text (not merely nearby). Connector lines are drawn only
+   for these pairs.
+========================================================================= */
+const ZONES = [
+  // --- EA Ground Adjustment ---
+  { id:"1a",  site:"ea", name:"Location 1a", description:"Orange bank seepage and ponding",
+    doc:"EA_GROUND_ADJUSTMENT", page:16, lat:53.777335, lng:-2.961047, links:[] },
+  { id:"2a",  site:"ea", name:"Location 2a", description:"Orange bank seepage and mudboils",
+    doc:"EA_GROUND_ADJUSTMENT", page:20, lat:53.779886, lng:-2.964604, links:["phfbal-007"] },
+  { id:"3a",  site:"ea", name:"Location 3a", description:"Bank condition and localised bank-face opening",
+    doc:"EA_GROUND_ADJUSTMENT", page:27, lat:53.782503, lng:-2.969205, links:["phfbal-007"] },
+  { id:"4d",  site:"ea", name:"Location 4d", description:"Cluster of circular ground depressions, some fluid-filled",
+    doc:"EA_GROUND_ADJUSTMENT", page:37, lat:53.792673, lng:-2.971925, links:["phfbal-002","phf-sentinel"] },
+  { id:"5b",  site:"ea", name:"Location 5b", description:"Ponding and bank-adjacent staining near the motorway",
+    doc:"EA_GROUND_ADJUSTMENT", page:46, lat:53.794415, lng:-2.963893, links:[] },
+  { id:"6a",  site:"ea", name:"Location 6a", description:"Surface cracking and low mounding across the M55 corridor",
+    doc:"EA_GROUND_ADJUSTMENT", page:52, lat:53.796556, lng:-2.951206, links:[] },
+  { id:"7a",  site:"ea", name:"Location 7a", description:"Bank erosion and channel-margin instability along Carr Bridge Brook",
+    doc:"EA_GROUND_ADJUSTMENT", page:55, lat:53.790768, lng:-2.956884, links:[] },
+  { id:"8a",  site:"ea", name:"Location 8a", description:"Embankment depression and active seepage",
+    doc:"EA_GROUND_ADJUSTMENT", page:64, lat:53.786200, lng:-2.944159, links:[] },
+  { id:"9",   site:"ea", name:"Location 9",  description:"Verge surface irregularities and ground depressions",
+    doc:"EA_GROUND_ADJUSTMENT", page:71, lat:53.786352, lng:-2.969010, links:[] },
+  { id:"10",  site:"ea", name:"Location 10", description:"Bank-face discharge along the Main Drain",
+    doc:"EA_GROUND_ADJUSTMENT", page:75, lat:53.787419, lng:-2.970334, links:["phf-sentinel"] },
+  { id:"11b", site:"ea", name:"Location 11b", description:"Ground surface expression aligned with LiDAR depression",
+    doc:"EA_GROUND_ADJUSTMENT", page:87, lat:53.786584, lng:-2.960522, links:["phfbal-005"] },
+  { id:"12",  site:"ea", name:"Location 12", description:"Intermediate fields — surface wetness and disturbance",
+    doc:"EA_GROUND_ADJUSTMENT", page:93, lat:53.785139, lng:-2.965952, links:[] },
+
+  // --- Scarp / Depressions / Pond ---
+  { id:"scarp-u1", site:"scarp", name:"Scarp (A)", description:"Scarp-like depression complex",
+    doc:"PNR_SCARP_DEPRESSIONS_POND_v1_0", page:4, lat:53.786807, lng:-2.946016, links:[] },
+  { id:"scarp-u2", site:"scarp", name:"Emergent pond (C)", description:"Emergent pond-like feature",
+    doc:"PNR_SCARP_DEPRESSIONS_POND_v1_0", page:11, lat:53.786359, lng:-2.948495, links:[] },
+  { id:"scarp-u3", site:"scarp", name:"Widening depression (B)", description:"Widening field depression",
+    doc:"PNR_SCARP_DEPRESSIONS_POND_v1_0", page:9, lat:53.787599, lng:-2.948266, links:[] },
+  { id:"scarp-u4", site:"scarp", name:"Bubbling pond — Teardrop Pond (D)", description:"Teardrop Pond — bubbling, olive-green water",
+    doc:"PNR_SCARP_DEPRESSIONS_POND_v1_0", page:12, lat:53.788793, lng:-2.949116, links:[] },
+
+  // --- PHF-BAL corridor ---
+  { id:"phfbal-001", site:"bal", name:"PHF-BAL-001", description:"Adjacent lowering bowl",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:7, lat:53.791528, lng:-2.975109, links:[] },
+  { id:"phfbal-002", site:"bal", name:"PHF-BAL-002", description:"Gardeners Lower Fields / Location 4 drainage corridor",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:9, lat:53.793428, lng:-2.967703, links:["4d"] },
+  { id:"phfbal-003", site:"bal", name:"PHF-BAL-003", description:"First southward field",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:29, lat:53.790204, lng:-2.967570, links:[] },
+  { id:"phfbal-004", site:"bal", name:"PHF-BAL-004", description:"Intermediate field and drainage boundary",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:33, lat:53.788058, lng:-2.965392, links:[] },
+  { id:"phfbal-005", site:"bal", name:"PHF-BAL-005", description:"Ground Adjustment Location 11 and Hex pond complex",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:36, lat:53.787142, lng:-2.961469, links:["11b"] },
+  { id:"phfbal-006", site:"bal", name:"PHF-BAL-006", description:"Fields south of the PNR/Moss House Lane junction",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:41, lat:53.784977, lng:-2.968173, links:[] },
+  { id:"phfbal-007", site:"bal", name:"PHF-BAL-007", description:"Field between Ground Adjustment Locations 2 and 3",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:43, lat:53.782878, lng:-2.969358, links:["2a","3a"] },
+  { id:"phfbal-008", site:"bal", name:"PHF-BAL-008", description:"Fields east of Peel Road",
+    doc:"PHF_BAL_INTEGRATED_EVIDENTIAL_UPDATE_v0_1_7", page:45, lat:53.778235, lng:-2.972259, links:[] },
+
+  // --- PHF Sentinel Study ---
+  { id:"phf-sentinel", site:"sentinel", name:"PHF Sentinel Study", description:"Pond/seepage area, scarp-hole group, mapped elevation loss",
+    doc:"PHF_SENTINEL_STUDY_v0_1", page:2, lat:53.790783, lng:-2.976324, links:["4d","10"] }
+];
+
+/* Wakepark Fault (Smythe) — real trace, from Wakepark_Fault__SMYTHE_.kmz */
+const FAULT_TRACE = [
+  [53.8277654, -2.9443454],
+  [53.8006782, -2.9625610],
+  [53.7930312, -2.9720621],
+  [53.7682346, -2.9856628]
+];
+
+/* ---- helpers ---- */
+function resolveColor(varName){
+  return getComputedStyle(document.documentElement).getPropertyValue(varName.replace('var(','').replace(')','')).trim();
+}
+function docLink(zone){
+  const doc = DOC_REGISTRY[zone.doc];
+  if(!doc) return "#";
+  if(doc.link_type === "pdf") return `${doc.href}#page=${zone.page}`;
+  return `${doc.href}#${zone.id}`;
+}
+
+/* ---- map init ---- */
+const map = L.map('map', { zoomControl: true }).setView([53.7870, -2.9620], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors',
+  maxZoom: 19
+}).addTo(map);
+
+L.polyline(FAULT_TRACE, {
+  color: resolveColor('var(--fault-red)'), weight: 2.5, dashArray: '6 5', opacity: 0.85
+}).addTo(map).bindTooltip("Wakepark Fault — projection per Prof. Smythe", {sticky:true});
+
+/* ---- cross-reference connector lines (deduped) ---- */
+const zoneById = {};
+ZONES.forEach(z => zoneById[z.id] = z);
+
+const drawnPairs = new Set();
+ZONES.forEach(z => {
+  (z.links || []).forEach(otherId => {
+    const other = zoneById[otherId];
+    if(!other) return;
+    const key = [z.id, otherId].sort().join('|');
+    if(drawnPairs.has(key)) return;
+    drawnPairs.add(key);
+    L.polyline([[z.lat, z.lng],[other.lat, other.lng]], {
+      color: resolveColor('var(--link-line)'), weight: 1.5, dashArray: '2 5', opacity: 0.75
+    }).addTo(map);
+  });
+});
+
+/* ---- markers ---- */
+function popupHTML(z){
+  const doc = DOC_REGISTRY[z.doc] || {};
+  const site = SITES[z.site];
+  return `
+    <div class="popup-inner">
+      <p class="p-name">${z.name}</p>
+      <p class="p-desc">${z.description}</p>
+      <a class="p-link" style="background:${resolveColor(site.dark)}" href="${docLink(z)}">Read in paper (p.${z.page})</a>
+      <p class="p-doc">${doc.title || z.doc}</p>
+    </div>`;
+}
+
+const markers = {};
+ZONES.forEach(z => {
+  const site = SITES[z.site];
+  const marker = L.circleMarker([z.lat, z.lng], {
+    radius: 7,
+    color: resolveColor(site.dark),
+    fillColor: resolveColor(site.color),
+    fillOpacity: 0.9,
+    weight: 1.5
+  }).addTo(map);
+  marker.bindPopup(popupHTML(z));
+  markers[z.id] = marker;
+});
+
+/* ---- filters (by site) ---- */
+const filtersEl = document.getElementById('filters');
+const activeSites = new Set(Object.keys(SITES));
+
+Object.entries(SITES).forEach(([key, site]) => {
+  const row = document.createElement('label');
+  row.className = 'filter-row';
+  row.innerHTML = `
+    <input type="checkbox" checked data-site="${key}">
+    <span class="swatch" style="background:${resolveColor(site.color)}"></span>
+    <span>${site.label}</span>`;
+  row.querySelector('input').addEventListener('change', (e) => {
+    if(e.target.checked) activeSites.add(key); else activeSites.delete(key);
+    applyFilter();
+  });
+  filtersEl.appendChild(row);
+});
+
+function applyFilter(){
+  ZONES.forEach(z => {
+    const show = activeSites.has(z.site);
+    const m = markers[z.id];
+    if(show){ if(!map.hasLayer(m)) m.addTo(map); } else { if(map.hasLayer(m)) map.removeLayer(m); }
+    const li = document.getElementById('li-' + z.id);
+    if(li) li.classList.toggle('hidden', !show);
+  });
+}
+
+/* ---- sidebar list ---- */
+const listEl = document.getElementById('zoneList');
+ZONES.forEach(z => {
+  const site = SITES[z.site];
+  const item = document.createElement('div');
+  item.className = 'zone-item';
+  item.id = 'li-' + z.id;
+  item.innerHTML = `
+    <div class="zone-dot" style="background:${resolveColor(site.color)}; border-color:${resolveColor(site.dark)}"></div>
+    <div class="zone-meta">
+      <div class="name">${z.name}</div>
+      <div class="desc">${z.description}</div>
+    </div>`;
+  item.addEventListener('click', () => {
+    map.flyTo([z.lat, z.lng], 15, { duration: 0.6 });
+    markers[z.id].openPopup();
+    document.querySelectorAll('.zone-item').forEach(el => el.classList.remove('active'));
+    item.classList.add('active');
+  });
+  listEl.appendChild(item);
+});
+</script>
+</body>
+</html>
