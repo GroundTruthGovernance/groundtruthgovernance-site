@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ground Truth & Governance response to the Environment Agency draft decision consultation for the Cloughton 2 wellsite at Burniston, North Yorkshire.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Cloughton 2 / Burniston | Ground Truth &amp; Governance</title>
+<style>
+  :root {
+    --text: #1a1a1a;
+    --text-secondary: #55555a;
+    --border: #e2e2e0;
+    --surface: #f7f7f5;
+    --accent: #3a5a78;
+    --warning-bg: #fdf3e0;
+    --warning-text: #7a5200;
+    --warning-border: #f0d99a;
+    --badge-final: #2f6b3a;
+    --badge-final-bg: #e8f3ea;
+    --badge-working: #8a5a00;
+    --badge-working-bg: #fdf3e0;
+    --badge-note: #45536b;
+    --badge-note-bg: #eaeef4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: Georgia, 'Times New Roman', serif; color: var(--text); line-height: 1.6; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  header { border-bottom: 1px solid var(--border); padding: 18px 0; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .site-name { font-size: 18px; font-weight: 700; color: var(--text); text-decoration: none; }
+  .site-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: var(--text-secondary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: -2px; }
+  .site-name-block { display: flex; flex-direction: column; }
+  nav { font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
+  nav a { color: var(--text); text-decoration: none; margin-left: 22px; }
+  nav a:first-child { margin-left: 0; }
+  nav a:visited { color: var(--text); }
+  nav a:hover { color: var(--accent); text-decoration: underline; }
+
+  .nav-dropdown { position: relative; display: inline-block; margin-left: 22px; }
+  .nav-dropdown summary { list-style: none; cursor: pointer; color: var(--text); margin-left: 0; font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; }
+  .nav-dropdown summary::-webkit-details-marker { display: none; }
+  .nav-dropdown summary::marker { content: ""; }
+  .nav-dropdown summary:hover { color: var(--accent); }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 0;
+    min-width: 190px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+    z-index: 20;
+  }
+  .nav-dropdown-menu a { display: block; padding: 8px 16px; margin-left: 0; white-space: nowrap; }
+  .nav-dropdown[open] .nav-dropdown-menu { display: block; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+
+  h1 { font-size: 26px; font-weight: 400; margin: 32px 0 6px; }
+
+  .summary-box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14.5px;
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    color: var(--warning-text);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+  }
+  .summary-box strong { color: var(--warning-text); }
+  .summary-box a { color: var(--warning-text); font-weight: 700; }
+
+  .intro { font-family: Arial, Helvetica, sans-serif; font-size: 14.5px; color: var(--text-secondary); max-width: 760px; margin-bottom: 8px; }
+  .intro p { margin: 0 0 14px; }
+
+  h2.section-title { font-size: 19px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin: 40px 0 20px; }
+
+  .report-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+  .report-card h3 { font-size: 17px; margin: 0 0 6px; font-weight: 700; }
+  .meta { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .badge { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .badge.final { color: var(--badge-final); background: var(--badge-final-bg); }
+  .badge.working { color: var(--badge-working); background: var(--badge-working-bg); }
+  .badge.note { color: var(--badge-note); background: var(--badge-note-bg); }
+  .desc { font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: var(--text); margin: 0 0 14px; max-width: 760px; }
+  .links { font-family: Arial, Helvetica, sans-serif; font-size: 13.5px; display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .link-plain { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .link-plain:hover { text-decoration: underline; }
+
+  .hysplit-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 10px; }
+  @media (max-width: 700px) { .hysplit-pair { grid-template-columns: 1fr; } }
+  .hysplit-pair img { width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block; }
+  .hysplit-caption { font-family: Arial, Helvetica, sans-serif; font-size: 12.5px; color: var(--text-secondary); margin-bottom: 40px; }
+
+  .slideshow {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .slideshow-img-wrap { text-align: center; margin-bottom: 14px; }
+  .slideshow-img-wrap img { max-width: 100%; max-height: 640px; border-radius: 8px; display: inline-block; }
+  .slideshow-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 12px;
+  }
+  .slide-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .slide-btn:hover { opacity: 0.9; }
+  .slide-counter { font-size: 13px; color: var(--text-secondary); min-width: 70px; text-align: center; }
+  .slide-info { text-align: center; font-family: Arial, Helvetica, sans-serif; }
+  .slide-date { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .slide-caption { font-size: 14px; color: var(--text-secondary); max-width: 720px; margin: 0 auto 8px; }
+  .slide-download { font-size: 12.5px; }
+  .slide-download a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .slide-download a:hover { text-decoration: underline; }
+
+  .download-all { text-align: center; margin: 20px 0 50px; }
+  .download-all a {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 22px;
+    border-radius: 6px;
+  }
+  .download-all a:hover { opacity: 0.9; }
+
+  .cta-box {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14.5px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin: 30px 0 50px;
+  }
+  .cta-box a.pending { color: #a05a2c; font-style: italic; font-weight: 400; }
+
+  footer { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: var(--text-secondary); border-top: 1px solid var(--border); padding: 22px 0 40px; margin-top: 30px; }
+  .contact { margin-top: 8px; }
+  .presented-by { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-secondary); opacity: 0.8; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="site-name-block">
+      <a class="site-name" href="index.html">Ground Truth &amp; Governance</a>
+      <span class="site-subtitle">The Open Record</span>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reports.html">Reports</a>
+      <details class="nav-dropdown">
+        <summary class="nav-dropdown-trigger">Updates</summary>
+        <div class="nav-dropdown-menu">
+          <a href="july-update.html">July 2026 Update</a>
+          <a href="cloughton-2-update.html">Cloughton 2 / Burniston</a>
+        </div>
+      </details>
+      <a href="governance.html">Governance Analysis</a>
+      <a href="lidar.html">LiDAR</a>
+      <a href="public-notice.html">Public Notice</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <h1>Cloughton 2 / Burniston &mdash; Environmental Permit Consultation Response</h1>
+
+  <div class="summary-box">
+    <strong>In short:</strong> The Environment Agency is deciding whether to grant an environmental permit for a gas exploration well and low-volume fracking operation ("proppant squeeze") at Burniston, near Scarborough. We have reviewed the application against UK, EU and international standards and found that key baseline testing &mdash; groundwater, air, ground condition, seismic monitoring &mdash; is either missing or deferred until after the permit is granted. We are not saying contamination will happen. We are saying the permit as drafted does not yet let anyone check. The consultation closes 23 September 2026 &mdash; <a href="https://consult.environment-agency.gov.uk/psc/yo13-0db-europa-oil-gas-limited-draft-decision/consultation/" target="_blank" rel="noopener">have your say</a>.
+  </div>
+
+  <div class="intro">
+    <p>This page presents our formal response to the Environment Agency's draft decision consultation on permit EPR/YP3623LC/A001, covering the proposed Cloughton 2 wellsite at Burniston, North Yorkshire. The site is unconnected to Preston New Road, but the monitoring-architecture framework developed there &mdash; testing whether a permit's proposed detection system can actually catch, attribute and reconstruct the events it claims to control for &mdash; applies directly here.</p>
+    <p>The documents below distinguish binding UK law from EU-derived provisions, current EU comparators used only for context, and international technical benchmarks. Findings are graded by severity, and each comes with a proposed permit condition that would close it. Two images from our Preston New Road archive are included further down this page as methodological illustration only &mdash; not as evidence about Burniston, which has not yet been constructed.</p>
+  </div>
+
+  <h2 class="section-title">Documents</h2>
+
+  <div class="report-card">
+    <h3>Formal Objection to Draft Environmental Permit</h3>
+    <div class="meta"><span class="badge working">Formal submission</span><span>Submitted 6 August 2026, v1.2</span></div>
+    <p class="desc">Our primary response to the Environment Agency, requesting twenty specific permit amendments before the permit is granted.</p>
+    <div class="links">
+      <a class="link-plain" href="https://archive.org/details/cloughton-2-permit-objection-daniel-nye-2026-08-06-v-1-2" target="_blank" rel="noopener">Read the objection</a>
+      <a class="link-plain" href="https://archive.org/download/cloughton-2-permit-objection-daniel-nye-2026-08-06-v-1-2/Cloughton_2_Permit_Objection_Daniel_Nye_2026-08-06_v1_2.pdf" target="_blank" rel="noopener" download>Download now (PDF)</a>
+    </div>
+  </div>
+
+  <div class="report-card">
+    <h3>Environmental Monitoring and Assurance at the Cloughton 2 Wellsite</h3>
+    <div class="meta"><span class="badge final">Substantial report</span><span>v1.2</span></div>
+    <p class="desc">The full technical assessment underpinning the objection: a standard-by-standard comparison against UK, EU and international benchmarks, a ranked gap register, and a review of comparable monitoring failures at other sites.</p>
+    <div class="links">
+      <a class="link-plain" href="https://archive.org/details/cloughton-2-environmental-standards-gap-assessment-v-1-2" target="_blank" rel="noopener">Read the full assessment</a>
+      <a class="link-plain" href="https://archive.org/download/cloughton-2-environmental-standards-gap-assessment-v-1-2/Cloughton_2_Environmental_Standards_Gap_Assessment_v1_2.pdf" target="_blank" rel="noopener" download>Download now (PDF)</a>
+    </div>
+  </div>
+
+  <div class="report-card">
+    <h3>Standards-Based Consultation Addendum</h3>
+    <div class="meta"><span class="badge note">Concise technical note</span><span>v1.2</span></div>
+    <p class="desc">A condensed version of the findings and requested permit conditions, for readers who want the substance without the full report.</p>
+    <div class="links">
+      <a class="link-plain" href="https://archive.org/details/cloughton-2-environmental-standards-consultation-addendum-v-1-2" target="_blank" rel="noopener">Read the summary</a>
+      <a class="link-plain" href="https://archive.org/download/cloughton-2-environmental-standards-consultation-addendum-v-1-2/Cloughton_2_Environmental_Standards_Consultation_Addendum_v1_2.pdf" target="_blank" rel="noopener" download>Download now (PDF)</a>
+    </div>
+  </div>
+
+  <h2 class="section-title">Methodology illustration: air-parcel trajectories</h2>
+  <div class="hysplit-pair">
+    <img src="Images/Burniston/pnr%20air%201%20day.jpg" alt="Daily air-parcel trajectory ensemble, Preston New Road, October 2018">
+    <img src="Images/Burniston/pnr%20air%201%20month.jpg" alt="Monthly air-parcel trajectory ensemble, Preston New Road, October 2018">
+  </div>
+  <p class="hysplit-caption">Figure: Daily and monthly air-parcel trajectory modelling, Preston New Road, October 2018 (NOAA HYSPLIT / Google Earth). These are not concentration or exposure maps &mdash; they illustrate that a fixed air monitor's position relative to a release shifts constantly with wind direction, which is why we are asking for continuous rather than fixed-point monitoring at Burniston. Shown for methodology only; no equivalent monitoring yet exists at Cloughton 2.</p>
+
+  <h2 class="section-title">Methodology illustration: shared-surface containment</h2>
+  <div class="intro">
+    <p>The images below are drawn from our Preston New Road archive spanning 2017 to 2026. They are included to illustrate why we are asking Cloughton 2's permit to treat vehicles and mobile equipment as possible contamination carriers across the whole shared operational surface, not just the engineered containment beneath the well itself. Shown chronologically, the set also demonstrates that this is a recurring operational condition rather than a single incident. <strong>Preston New Road only &mdash; Cloughton 2 has not yet been built.</strong></p>
+  </div>
+
+  <div class="slideshow">
+    <div class="slideshow-img-wrap">
+      <img id="slide-img" src="" alt="">
+    </div>
+    <div class="slide-info">
+      <div class="slide-date" id="slide-date"></div>
+      <p class="slide-caption" id="slide-caption"></p>
+      <div class="slide-download" id="slide-download"></div>
+    </div>
+    <div class="slideshow-controls">
+      <button class="slide-btn" onclick="prevSlide()">&larr; Previous</button>
+      <span class="slide-counter" id="slide-counter"></span>
+      <button class="slide-btn" onclick="nextSlide()">Next &rarr;</button>
+    </div>
+  </div>
+
+  <div class="download-all">
+    <a href="https://archive.org/download/burniston-ea-objection.-7z/Burniston_EA_Objection.7z" target="_blank" rel="noopener">Download all documents (7z, 17.5 MB)</a>
+  </div>
+
+  <div class="cta-box" id="consultation-cta">
+    The consultation is open until <strong>23 September 2026</strong>. You do not need technical expertise to respond &mdash; the Environment Agency accepts comments on local impact, missing information, and whether the right monitoring is proposed. <a href="https://consult.environment-agency.gov.uk/psc/yo13-0db-europa-oil-gas-limited-draft-decision/consultation/" target="_blank" rel="noopener">Submit your own response</a>.
+  </div>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    Ground Truth &amp; Governance &mdash; an independent evidential record of the Preston New Road corridor and related UK onshore hydrocarbon sites.
+    <div class="contact">Correspondence, source-file requests and technical enquiries: <a href="mailto:info@nedarchive.org" style="color:var(--accent);">info@nedarchive.org</a></div>
+    <div class="presented-by">Presented by NED Archive &mdash; National Evidence &amp; Documentation</div>
+  </div>
+</footer>
+
+<script>
+  var slides = [
+    { file: "22062017_artesian_Aquifer.jpg", date: "22 June 2017", caption: "Early construction-stage view showing widespread wet ground and pooling across the developing pad following the documented artesian-water encounter. Still captured from video footage." },
+    { file: "pnr_Drill_Assembly_iridesence_DJI_0012.JPG", date: "9 August 2017", caption: "Extensive wetting and reflective surface water across the active pad during drill assembly, including around equipment and working areas." },
+    { file: "pnr_Drill_AssemblyDJI_0006.JPG", date: "9 August 2017", caption: "Drill-assembly phase showing repeated local pools and wet surface corridors around cranes, equipment and stored materials." },
+    { file: "PNR_Tanker_LeakDJI_0160.JPG", date: "17 September 2017", caption: "Localised blue-grey liquid and staining beside tanks, containers and the internal screening wall, with wet aggregate extending into the surrounding work area." },
+    { file: "PNR_Flood_1_DJI_0057.JPG", date: "25 October 2017", caption: "Close overhead view of floodwater extending around cabins, pipework and service equipment near the pad perimeter." },
+    { file: "PNR_Flood_1_DJI_0107.JPG", date: "25 October 2017", caption: "Severe pad flooding, with a large continuous body of muddy water covering much of the western and northern operational surface." },
+    { file: "pnr_wet_margin_DJI_0636.JPG", date: "4 April 2018", caption: "Saturated and flattened vegetation immediately outside the pad margin, with muddy water collecting along the boundary and adjoining field track." },
+    { file: "PNR_Drill_Disassembly_DJI_0263.JPG", date: "2 August 2018", caption: "Drill-disassembly phase showing extensive staining, exposed working surfaces and localised pools around the central equipment area." },
+    { file: "PNR_Gravel_DJI_0224.JPG", date: "9 August 2018", caption: "Later operational view showing comparatively dry pale aggregate, resurfaced areas and variations in pad texture and level." },
+    { file: "pnr_ponding_DJI_0035.JPG", date: "8 September 2018", caption: "Broad view of the pad with multiple wet and ponded areas remaining across the operational surface." },
+    { file: "pnr_flood_2_DJI_0181.JPG", date: "29 September 2019", caption: "Wider flood-condition view showing ponding across parts of the pad and extensive standing water throughout the surrounding fields." },
+    { file: "pnr_flood_2_DJI_0209.JPG", date: "29 September 2019", caption: "Close overhead view of muddy standing water along the pad margin and adjacent exterior ground, illustrating simultaneous loading on both sides of the containment boundary." },
+    { file: "pnr_wet_pad_DJI_0044.JPG", date: "11 October 2019", caption: "Widespread surface wetting and ponding across the operational pad, with saturated fields and standing water also visible beyond the perimeter." },
+    { file: "pnr_decomissioning_DJI_0583.JPG", date: "17 March 2025", caption: "Decommissioning-stage view showing a largely exposed pad surface with local wet patches, covered ground and remaining infrastructure." },
+    { file: "pnr_present_day_DJI_0690.JPG", date: "10 July 2026", caption: "Later cleared-pad condition showing residual staining, patching, disturbed aggregate and covered areas after most operational infrastructure had been removed." }
+  ];
+
+  var current = 0;
+  var basePath = "Images/Burniston/";
+
+  function renderSlide() {
+    var s = slides[current];
+    var encodedFile = encodeURIComponent(s.file);
+    document.getElementById('slide-img').src = basePath + encodedFile;
+    document.getElementById('slide-img').alt = s.file + ', ' + s.date;
+    document.getElementById('slide-date').textContent = s.date;
+    document.getElementById('slide-caption').textContent = s.caption;
+    document.getElementById('slide-counter').textContent = (current + 1) + ' of ' + slides.length;
+    document.getElementById('slide-download').innerHTML = '<a href="' + basePath + encodedFile + '" download>Download full-resolution image</a>';
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    renderSlide();
+  }
+
+  function prevSlide() {
+    current = (current - 1 + slides.length) % slides.length;
+    renderSlide();
+  }
+
+  renderSlide();
+</script>
+
+</body>
+</html>
